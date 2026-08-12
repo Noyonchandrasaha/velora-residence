@@ -68,7 +68,12 @@ export function BlueManifesto() {
         </div>
 
         <div ref={image} className="blueHouseMotion">
-          <Image src={images.exterior} alt="Full exterior of The Hidden Retreat" fill sizes="100vw" />
+          <Image
+            src={images.exterior}
+            alt="Full exterior of The Hidden Retreat"
+            fill
+            sizes="(max-width: 900px) 100vw, min(82vw, 1340px)"
+          />
           <div className="blueHouseShade" />
           <div ref={action} className="blueHouseAction"><CompactAction href="#inside" light>See inside</CompactAction></div>
         </div>

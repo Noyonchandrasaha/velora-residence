@@ -38,7 +38,7 @@ export function ClosingInvitation() {
         <CompactAction href="mailto:hello@example.com" light>Request a viewing</CompactAction>
       </div>
       <div ref={image} className="closingMotionImage">
-        <Image src={images.night} alt="The retreat glowing at night among the trees" fill sizes="100vw" />
+        <Image src={images.night} alt="The retreat glowing at night among the trees" fill sizes="(max-width: 560px) 100vw, min(86vw, 1440px)" />
         <div className="closingImageShade" />
       </div>
       <footer className="referenceFooter motionFooter">

@@ -3,6 +3,7 @@ import "./globals.css";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { SiteLoader } from "@/components/layout/site-loader";
 
 export const metadata: Metadata = {
   title: "The Hidden Retreat — Forest Residence",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <SiteLoader />
         <SmoothScrollProvider>
           <ScrollProgress />
           <SiteHeader />

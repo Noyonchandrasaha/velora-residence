@@ -17,6 +17,14 @@ export function ResidenceOverview() {
   const trackFill = useRef<HTMLDivElement>(null);
   const trackDot = useRef<HTMLSpanElement>(null);
 
+  const houseSequence = [
+    { src: images.partial, alt: "The retreat partially revealed through the forest" },
+    { src: images.exterior, alt: "The retreat exterior among the trees" },
+    { src: images.entrance, alt: "The quiet entrance to the retreat" },
+    { src: images.courtyard, alt: "The courtyard framed by the forest" },
+    { src: images.sunset, alt: "The retreat at sunset" },
+  ];
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
@@ -46,16 +54,34 @@ export function ResidenceOverview() {
         scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom top", scrub: 1 },
       });
 
+      const houseSlides = gsap.utils.toArray<HTMLElement>(".houseSlide", section.current);
+      let activeSlide = 0;
+      gsap.set(houseSlides, { autoAlpha: 0 });
+      gsap.set(houseSlides[0], { autoAlpha: 1 });
+      ScrollTrigger.create({
+        trigger: ".overviewSequence",
+        start: "top 78%",
+        end: "bottom 28%",
+        scrub: true,
+        onUpdate: (self) => {
+          const nextSlide = Math.min(houseSlides.length - 1, Math.floor(self.progress * houseSlides.length));
+          if (nextSlide === activeSlide) return;
+          activeSlide = nextSlide;
+          gsap.to(houseSlides, { autoAlpha: 0, duration: 0.28, ease: "power2.out", overwrite: true });
+          gsap.to(houseSlides[activeSlide], { autoAlpha: 1, duration: 0.42, ease: "power2.out", overwrite: true });
+        },
+      });
+
       gsap.fromTo(trackFill.current, { scaleX: 0.06 }, {
         scaleX: 1,
         transformOrigin: "left center",
         ease: "none",
-        scrollTrigger: { trigger: ".overviewMediaGrid", start: "top 78%", end: "bottom 28%", scrub: 0.6 },
+        scrollTrigger: { trigger: ".overviewSequence", start: "top top", end: "bottom bottom", scrub: 0.6 },
       });
       gsap.fromTo(trackDot.current, { x: 0 }, {
         x: () => Math.max(0, (trackDot.current?.parentElement?.clientWidth ?? 220) - 28),
         ease: "none",
-        scrollTrigger: { trigger: ".overviewMediaGrid", start: "top 78%", end: "bottom 28%", scrub: 0.6 },
+        scrollTrigger: { trigger: ".overviewSequence", start: "top top", end: "bottom bottom", scrub: 0.6 },
       });
     });
 
@@ -81,7 +107,8 @@ export function ResidenceOverview() {
         </div>
       </div>
 
-      <div className="overviewMediaGrid">
+      <div className="overviewSequence">
+        <div className="overviewMediaGrid">
         <article className="quotePanel" data-overview-reveal>
           <div ref={pathImage} className="quoteImage">
             <Image src={images.path} alt="A stone pathway through the forest" fill sizes="(max-width: 768px) 100vw, 38vw" />
@@ -92,13 +119,18 @@ export function ResidenceOverview() {
 
         <article className="housePanel" data-overview-reveal>
           <div ref={houseImage} className="housePanelImage">
-            <Image src={images.partial} alt="The retreat partially revealed through the forest" fill sizes="(max-width: 768px) 100vw, 55vw" />
+            {houseSequence.map((house, index) => (
+              <div className="houseSlide" key={house.src} style={{ position: "absolute", inset: 0 }}>
+                <Image src={house.src} alt={house.alt} fill sizes="(max-width: 768px) 100vw, 55vw" priority={index === 0} />
+              </div>
+            ))}
           </div>
           <div className="imageTrack" aria-hidden="true">
             <i ref={trackFill} />
             <span ref={trackDot} />
           </div>
         </article>
+        </div>
       </div>
     </section>
   );

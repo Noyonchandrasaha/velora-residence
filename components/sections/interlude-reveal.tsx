@@ -48,7 +48,7 @@ export function InterludeReveal() {
         <div ref={number} className="interludeNumber"><strong>54%</strong><span>of the feeling is outside the frame.</span></div>
         <div ref={frame} className="interludeFrame">
           <div ref={image} className="interludeImage">
-            <Image src={images.sunset} alt="The retreat at sunset in the forest" fill sizes="100vw" />
+            <Image src={images.sunset} alt="The retreat at sunset in the forest" fill sizes="(max-width: 900px) 100vw, 110px" />
           </div>
           <div className="interludeShade" />
         </div>

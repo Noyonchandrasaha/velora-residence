@@ -91,8 +91,8 @@ export function CinematicWalkthroughHero() {
 
       tl.fromTo(
         portal.current,
-        { width: 104, height: 132, borderRadius: 24, boxShadow: "0 22px 80px rgba(0,0,0,.13)" },
-        { width: "34vw", height: "52vh", borderRadius: 10, duration: 0.14, ease: "none" },
+        { width: "100vw", height: "100svh", borderRadius: 0, boxShadow: "0 0 0 rgba(0,0,0,0)" },
+        { width: "100vw", height: "100svh", borderRadius: 0, duration: 0.14, ease: "none" },
         0.02,
       )
         .to(intro.current, { autoAlpha: 0, y: -22, duration: 0.05, ease: "none" }, 0.08)
@@ -132,7 +132,7 @@ export function CinematicWalkthroughHero() {
 
       gsap.fromTo(
         portal.current,
-        { width: 94, height: 118, borderRadius: 20 },
+        { width: "100vw", height: "100svh", borderRadius: 0 },
         {
           width: "100vw",
           height: "100svh",

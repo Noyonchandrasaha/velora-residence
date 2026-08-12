@@ -87,14 +87,14 @@ export function CircularSplitReveal() {
 
         <div ref={lens} className="circularLens">
           <div ref={back} className="circularBackImage">
-            <Image src={images.bedroom} alt="Private bedroom facing the forest" fill sizes="100vw" />
+            <Image src={images.bedroom} alt="Private bedroom facing the forest" fill sizes="(max-width: 900px) 100vw, 21vw" />
             <div className="circularBackShade" />
           </div>
           <div ref={topHalf} className="circularHalf circularHalfTop">
-            <Image src={images.courtyard} alt="Courtyard with a preserved tree" fill sizes="100vw" />
+            <Image src={images.courtyard} alt="Courtyard with a preserved tree" fill sizes="(max-width: 900px) 100vw, 21vw" />
           </div>
           <div ref={bottomHalf} className="circularHalf circularHalfBottom">
-            <Image src={images.courtyard} alt="Courtyard with a preserved tree" fill sizes="100vw" />
+            <Image src={images.courtyard} alt="Courtyard with a preserved tree" fill sizes="(max-width: 900px) 100vw, 21vw" />
           </div>
         </div>
 

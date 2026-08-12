@@ -78,13 +78,17 @@ img { object-fit: cover; }
 .overviewMeta > div > p { margin: 10px 0 0; font-size: 10px; line-height: 1.45; color: #555; }
 .overviewIntro { max-width: 670px; justify-self: end; }
 .overviewIntro > p { margin: 0 0 28px !important; color: #111 !important; font-size: clamp(20px, 2.15vw, 38px) !important; line-height: 1.12 !important; letter-spacing: -.035em; }
-.overviewMediaGrid { display: grid; grid-template-columns: .78fr 1.35fr; gap: 10px; min-height: 620px; }
+.overviewSequence { height: 380svh; }
+.overviewMediaGrid { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: .78fr 1.35fr; gap: 10px; min-height: 0; }
 .quotePanel, .housePanel { position: relative; background: #eee; overflow: hidden; }
 .quoteImage, .housePanelImage { position: absolute; inset: -8%; will-change: transform; }
 .quoteImage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.5)); }
 .quotePanel blockquote { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 51px; margin: 0; color: white; font-size: clamp(18px, 1.7vw, 29px); line-height: 1.08; letter-spacing: -.035em; font-weight: 400; }
 .quoteMeta { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 18px; display: flex; justify-content: space-between; color: rgba(255,255,255,.65); }
 .housePanelImage img { object-position: center; }
+.houseSlide { position: absolute; inset: 0; opacity: 0; will-change: opacity; }
+.houseSlide:first-child { opacity: 1; }
+.houseSlide img { object-fit: cover; }
 .imageTrack { position: absolute; left: 18px; right: 18px; bottom: 17px; height: 23px; border-radius: 20px; background: rgba(244,244,242,.94); display: flex; align-items: center; padding: 0 8px; overflow: hidden; }
 .imageTrack::before { content: ""; position: absolute; left: 8px; right: 8px; top: 11px; height: 1px; background: rgba(0,0,0,.2); }
 .imageTrack i { position: absolute; z-index: 2; left: 8px; width: calc(100% - 16px); height: 3px; border-radius: 2px; background: #111; transform: scaleX(.06); transform-origin: left; }
@@ -177,7 +181,8 @@ img { object-fit: cover; }
   .portalHero { height: 230svh; }
   .overviewMeta { grid-template-columns: 1fr 1fr; }
   .overviewIntro { grid-column: 1 / -1; justify-self: start; margin-top: 35px; }
-  .overviewMediaGrid { grid-template-columns: 1fr; min-height: 0; }
+  .overviewSequence { height: auto; }
+  .overviewMediaGrid { position: relative; top: auto; height: auto; grid-template-columns: 1fr; min-height: 0; }
   .quotePanel, .housePanel { height: 72svh; }
   .metricsStrip { grid-template-columns: 1fr 1fr; }
   .metricLead { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -260,7 +265,7 @@ img { object-fit: cover; }
 .walkthroughHero {
   position: relative;
   height: 500svh;
-  background: var(--white);
+  background: #0a0c0b;
 }
 .walkthroughStage {
   position: sticky;
@@ -269,18 +274,20 @@ img { object-fit: cover; }
   overflow: hidden;
   display: grid;
   place-items: center;
-  background: var(--white);
+  background: #0a0c0b;
   isolation: isolate;
 }
+.walkthroughStage::before { content: ""; position: absolute; z-index: 1; inset: 24px; border: 1px solid rgba(255,255,255,.14); pointer-events: none; }
+.walkthroughStage::after { content: ""; position: absolute; z-index: 2; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 48%, transparent 0 28%, rgba(0,0,0,.18) 72%, rgba(0,0,0,.5) 100%); }
 .walkPortalIntro {
   position: absolute;
   z-index: 10;
-  top: 16vh;
-  left: 50%;
-  width: min(520px, calc(100vw - 36px));
-  transform: translateX(-50%);
-  text-align: center;
-  color: #151515;
+  top: 11vh;
+  left: clamp(42px, 6vw, 96px);
+  width: min(420px, calc(100vw - 84px));
+  transform: none;
+  text-align: left;
+  color: rgba(255,255,255,.82);
 }
 .walkPortalIntro span,
 .walkTopMeta,
@@ -299,19 +306,21 @@ img { object-fit: cover; }
   text-transform: uppercase;
 }
 .walkPortalIntro p {
-  margin: 10px 0 0;
-  color: #777;
+  margin: 14px 0 0;
+  max-width: 230px;
+  color: rgba(255,255,255,.52);
   font-size: 10px;
   line-height: 1.4;
 }
 .walkthroughPortal {
   position: relative;
   z-index: 3;
-  width: 104px;
-  height: 132px;
+  width: 100vw;
+  height: 100svh;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 0;
   background: #101311;
+  box-shadow: none;
   will-change: width, height, border-radius, transform, box-shadow;
 }
 .walkScene,
@@ -859,6 +868,7 @@ img { object-fit: cover; }
   .walkthroughStage { background: #0a0c0b; }
   .walkPortalIntro { display: none; }
   .walkthroughPortal { width: 100vw !important; height: 100svh !important; border-radius: 0 !important; }
+  .walkthroughStage::before { inset: 14px; }
   .walkScene { opacity: 0 !important; visibility: hidden !important; }
   .walkScene5 { opacity: 1 !important; visibility: visible !important; }
   .walkChapter { opacity: 0 !important; visibility: hidden !important; }
@@ -877,3 +887,24 @@ img { object-fit: cover; }
   .layeredRoomsDeck { position: relative; inset: auto; display: grid; gap: 40px; margin-block: 60px; }
   .layerRoomCard { position: relative; inset: auto; width: 100% !important; height: 65svh !important; transform: none !important; opacity: 1 !important; }
 }
+
+/* premium entry loader */
+body[data-loading="true"] { overflow: hidden; }
+.siteLoader { position: fixed; z-index: 1000; inset: 0; overflow: hidden; background: #0b100e; color: #f4f3ed; isolation: isolate; }
+.siteLoaderPanel { position: absolute; z-index: -1; top: 0; bottom: 0; width: 50.2%; background: #0b100e; transition: transform 1s cubic-bezier(.76,0,.24,1); }
+.siteLoaderPanelLeft { left: 0; }
+.siteLoaderPanelRight { right: 0; }
+.siteLoader.isLeaving .siteLoaderPanelLeft { transform: translateX(-100%); }
+.siteLoader.isLeaving .siteLoaderPanelRight { transform: translateX(100%); }
+.siteLoaderContent { position: absolute; left: clamp(24px, 5vw, 82px); right: clamp(24px, 5vw, 82px); top: 50%; transform: translateY(-50%); text-align: center; }
+.siteLoaderMeta { display: flex; justify-content: space-between; color: rgba(244,243,237,.52); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; opacity: 0; animation: loaderRise .8s .12s forwards; }
+.siteLoaderMark { width: 76px; height: 76px; margin: clamp(65px, 11vh, 125px) auto 28px; display: grid; place-items: center; border: 1px solid rgba(244,243,237,.48); border-radius: 50%; font-family: Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -.1em; opacity: 0; animation: loaderMark .9s .2s cubic-bezier(.22,1,.36,1) forwards; }
+.siteLoaderTitle { margin: 0; font-size: clamp(21px, 2.2vw, 34px); line-height: 1; letter-spacing: -.045em; text-transform: uppercase; opacity: 0; animation: loaderRise .8s .42s forwards; }
+.siteLoaderLine { width: min(300px, 52vw); height: 1px; margin: 28px auto 0; background: rgba(244,243,237,.18); overflow: hidden; }
+.siteLoaderLine i { display: block; width: 100%; height: 100%; background: #f4f3ed; transform: scaleX(0); transform-origin: left; animation: loaderProgress 1.25s .2s cubic-bezier(.22,1,.36,1) forwards; }
+.siteLoaderStatus { margin: 12px 0 0; color: rgba(244,243,237,.48); font-size: 8px; letter-spacing: .14em; text-transform: uppercase; opacity: 0; animation: loaderRise .7s .62s forwards; }
+.siteLoaderCorner { position: absolute; right: clamp(24px, 5vw, 82px); bottom: 28px; color: rgba(244,243,237,.42); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; opacity: 0; animation: loaderRise .7s .72s forwards; }
+@keyframes loaderMark { from { opacity: 0; transform: scale(.7) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes loaderRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes loaderProgress { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .siteLoaderPanel { transition-duration: .01ms; } .siteLoaderMeta, .siteLoaderMark, .siteLoaderTitle, .siteLoaderStatus, .siteLoaderCorner { animation: none; opacity: 1; } .siteLoaderLine i { animation: none; transform: scaleX(1); } }
